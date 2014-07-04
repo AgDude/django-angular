@@ -171,8 +171,8 @@ class NgFormBaseMixin(object):
 
     def get_widget_attrs(self, bound_field):
         """
-       Return a dictionary of additional widget attributes.
-       """
+        Return a dictionary of additional widget attributes.
+        """
         attrs = {}
         attrs['ng-model'] = '%s.%s' % (self.scope_prefix, bound_field.name) or bound_field.name
         return attrs

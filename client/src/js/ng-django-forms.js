@@ -24,9 +24,9 @@ djng_forms_module.directive('input', function($compile) {
 		//terminal: true,
 		link: function(scope, element, attr, formCtrl) {
 			var modelName;
-			if (!formCtrl || angular.isUndefined(formCtrl.$name) || element.prop('type') === 'hidden' || angular.isUndefined(attr.name) || angular.isDefined(attr.ngModel))
+			if (!formCtrl || !formCtrl.$name || element.prop('type') === 'hidden' || angular.isUndefined(attr.name) || angular.isDefined(attr.ngModel))
 				return;
-			modelName = 'dmy' + Math.abs(hashCode(formCtrl.$name)) +'.' + attr.name;
+			modelName = 'dmy' + Math.abs(hashCode(formCtrl.$name)) +'.' + attr.name.replace(/-/g, "_");
 			attr.$set('ngModel', modelName);
 			$compile(element, null, 9999)(scope);
 		}
@@ -60,7 +60,7 @@ djng_forms_module.directive('ngModel', function() {
 			  var defaultValue = field.defaultValue;
 			  if ( field.defaultValue === "true" || field.defaultValue === "True"){
 			    defaultValue = true;
-			  } 
+			  }
 			  else if ( field.defaultValue === "false" ||  field.defaultValue === "False"){
 			    defaultValue = false;
 			  }
@@ -119,7 +119,7 @@ djng_forms_module.directive('ngModel', function() {
 				restoreTextArea(modelCtrl, field);
 				break;
 			}
-			
+
 			// store the initial data on the form controller
 			if ( !formCtrl.hasOwnProperty('initial_data') ){
 			  formCtrl.initial_data = {};
@@ -196,7 +196,7 @@ djng_forms_module.factory('djangoForm', function() {
 	var NON_FIELD_ERRORS = '__all__';
 
 	function isNotEmpty(obj) {
-		for (var p in obj) { 
+		for (var p in obj) {
 			if (obj.hasOwnProperty(p))
 				return true;
 		}

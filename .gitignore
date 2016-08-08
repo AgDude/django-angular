@@ -14,6 +14,7 @@ client/node_modules
 .project
 .pydevproject
 .settings/
+.idea/
 .gitignore
 djangular/static/djangular/js/
 examples/test.sqlite
